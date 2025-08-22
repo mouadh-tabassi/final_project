@@ -1,10 +1,13 @@
-import React from "react";
-
+import React, { useEffect, useState } from "react";
+import { jwtDecode } from "jwt-decode";
+import { useNavigate } from "react-router";
 export default function Navbar(props) {
+  const [isliggedIn,setisloggedIn]=useState("");
   // Mobile menu toggle
   React.useEffect(() => {
     const button = document.getElementById("mobile-menu-button");
     const mobileMenu = document.getElementById("mobile-menu");
+    
 
     const toggleMenu = () => {
       const isExpanded = button.getAttribute("aria-expanded") === "true";
@@ -25,7 +28,17 @@ export default function Navbar(props) {
       button?.removeEventListener("click", toggleMenu);
     };
   }, []);
-
+    const token =localStorage.getItem("token");
+    let user=null;
+    if(token){
+      try {
+        user=jwtDecode(token)
+      } catch (error) {
+        console.error("Invalid token",err);        
+      }
+    }
+    const isloggedIn=!!user
+    const navigate=useNavigate();
   return (
     <div>
       {/* Navbar with Mega Menu */}
@@ -43,7 +56,7 @@ export default function Navbar(props) {
               <div className="hidden sm:block sm:ml-6">
                 <div className="flex space-x-4">
                   <a
-                    href="#"
+                    href="/"
                     className="text-gray-900 hover:bg-gray-100 px-3 py-2 rounded-md text-sm font-medium"
                   >
                     Home
@@ -53,8 +66,7 @@ export default function Navbar(props) {
                   <div className="relative group">
                     <button className="text-gray-900 hover:bg-gray-100 px-3 py-2 rounded-md text-sm font-medium flex items-center">
                       Products
-                      
-                      
+
                     </button>
                   </div>
 
@@ -81,20 +93,44 @@ export default function Navbar(props) {
             </div>
             <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
               <div className="hidden sm:flex sm:items-center">
-                <a
+                {isloggedIn ?(
+                <div>
+                    <div className="dropdown dropdown-end">
+                    <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                    <div className="w-10 rounded-full">
+                        <img
+                            alt="Tailwind CSS Navbar component"
+                            src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                  </div>
+                </div>
+              <ul
+                    tabIndex={0}
+                    className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+              <li><a onClick={()=>{localStorage.removeItem("token");
+                                    navigate("/Login");
+                                             
+              }}>Logout</a></li>
+              </ul>
+                </div>
+                </div>
+                ):(
+                   <div>
+                  <a
                   href="/Login"
                   className="text-gray-900 hover:bg-gray-100 px-3 py-2 rounded-md text-sm font-medium"
                 >
-                  {props.item1}
+                Login
                 </a>
                 <a
                   href="/Registration"
                   className="ml-4 bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-indigo-700"
                 >
-                  {props.item2}
+                Sign in
                 </a>
-              </div>
+                </div>
+                )}
 
+                </div>
               {/* Mobile menu button */}
               <div className="sm:hidden">
                 <button
@@ -234,18 +270,42 @@ export default function Navbar(props) {
 
             <div className="pt-4 pb-3 border-t border-gray-200">
               <div className="flex items-center px-3 space-y-2 flex-col">
-                <a
-                  href="#"
-                  className="block w-full text-center text-gray-900 bg-gray-100 px-3 py-2 rounded-md text-base font-medium"
+                {isloggedIn ?(
+                <div>
+                    <div className="dropdown dropdown-end">
+                    <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                    <div className="w-10 rounded-full">
+                        <img
+                            alt="Tailwind CSS Navbar component"
+                            src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                  </div>
+                </div>
+              <ul
+                    tabIndex={0}
+                    className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+              <li><a onClick={()=>{localStorage.removeItem("token");
+                                    navigate("/Login");
+                                             
+              }}>Logout</a></li>
+              </ul>
+                </div>
+                </div>
+                ):(
+                   <div>
+                  <a
+                  href="/Login"
+                  className="text-gray-900 hover:bg-gray-100 px-3 py-2 rounded-md text-sm font-medium"
                 >
-                  Login
+                Login
                 </a>
                 <a
-                  href="#"
-                  className="block w-full text-center bg-indigo-600 text-white px-3 py-2 rounded-md text-base font-medium"
+                  href="/Registration"
+                  className="ml-4 bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-indigo-700"
                 >
-                  Sign Up
+                Sign in
                 </a>
+                </div>
+                )}
               </div>
             </div>
           </div>

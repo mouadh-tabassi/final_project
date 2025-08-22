@@ -8,27 +8,26 @@ export async function postlogin(req,res){
         if(user){
             const validPass=bcrypt.compareSync(passwordacc,user.password)
             if(validPass){
-            console.log("you are connected successfully");
             const payload= {
                 firstname:user.firstname,
                 lastname:user.lastname,
                 email:user.email,
             }
-            const token= jwt.sign(payload,'1234567')
+            const token= jwt.sign(payload,'1234567',{ expiresIn: "1h" })
             res.status(200).json({token});
         }
             else{
-                res.status(404).json({message:"your password is incorrect"});
+                res.status(401).send({message:"your password is incorrect"});
             }
         }
         else{
-            res.status(404).json({message:"utilisateur inexistant"});
+            res.status(401).send({message:"utilisateur inexistant"});
         }
     }
 catch (error) {
     res.status(500).send(error);   
     }
-
-    
-
+}
+export function getlogin(req,res){
+     res.json({ loggedIn: true, user: req.user })
 }

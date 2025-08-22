@@ -2,21 +2,23 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import toast from 'react-hot-toast';
 import { set } from 'mongoose';
+import { useNavigate } from 'react-router';
 const LoginPage = () => {
     const [emailacc,setemailacc]=useState("");
     const [passwordacc,setpasswordacc]=useState("");
+    const navigate=useNavigate();
     const handleclick=async(e)=>{
         e.preventDefault();
         try {
-             const res=await axios.post("http://localhost:5000/Login",{
+            const res=await axios.post("http://localhost:5000/Login",{
             emailacc,
             passwordacc
         });
         localStorage.setItem("token",res.data.token)
+        navigate("/")
             return(toast.success("login successfully"));
         } catch (error) {
             return(toast.error("login failed"));
-            
         }
        ;
         

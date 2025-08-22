@@ -6,15 +6,9 @@ import HeaderSec from '../components/HeaderSec'
 import CardModule from '../components/CardModule'
 import Internship from '../components/Intership'
 import axios from 'axios'
+import {jwtDecode} from "jwt-decode";
+
 const HomePage = () => {
-   useEffect (()=>{
-    const isloggedin=localStorage.getItem("token");
-    if(isloggedin){
-      console.log("connected");
-    }else{
-      console.log("disconnecetd");
-    }
-  },[])
   return (
     <div>
       <Navbar/>
