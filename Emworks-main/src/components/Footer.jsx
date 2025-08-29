@@ -4,12 +4,11 @@ const scrollabout=()=>{
 }
 const Footer = (props) => {
   return (
-<footer className="footer footer-center bg-gray-200 text-base-content p-10 ">
+<footer className="footer footer-center bg-gradient-to-r from-gray-500 to-gray-300 text-white p-10 ">
   <nav className="grid grid-flow-col gap-4">
     <a onClick={scrollabout} className="link link-hover">{props.item1}</a>
     <a className="link link-hover">{props.item2}</a>
     <a className="link link-hover">{props.item3}</a>
-    <a className="link link-hover">{props.item4}</a>
   </nav>
   <nav>
     <div className="grid grid-flow-col gap-4">

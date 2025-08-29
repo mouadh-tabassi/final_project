@@ -3,7 +3,12 @@ import axios from 'axios'
 import toast from 'react-hot-toast';
 import { set } from 'mongoose';
 import { useNavigate } from 'react-router';
+import AOS from "aos";
+import "aos/dist/aos.css";
 const LoginPage = () => {
+     useEffect(() => {
+            AOS.init({ duration: 800, once: true }); 
+          }, []);
     const [emailacc,setemailacc]=useState("");
     const [passwordacc,setpasswordacc]=useState("");
     const navigate=useNavigate();
@@ -16,7 +21,7 @@ const LoginPage = () => {
         });
         localStorage.setItem("token",res.data.token)
         navigate("/")
-            return(toast.success("login successfully"));
+            return(toast.success("WELCOME"));
         } catch (error) {
             return(toast.error("login failed"));
         }
@@ -24,7 +29,8 @@ const LoginPage = () => {
         
     }
   return (
-     <div className='bg-gradient-to-br from-blue-50 via-white to-purple-50 min-h-screen flex items-center justify-center p-4'>
+     <div className='bg-gradient-to-br from-blue-50 via-white to-purple-50 min-h-screen flex items-center justify-center p-4'
+          data-aos="zoom-out-up"              >
      <div class="w-full max-w-md"> 
         <div class="bg-white/80 backdrop-blur-lg rounded-2xl shadow-2xl p-8 space-y-8 transition-all duration-500 hover:shadow-xl">
             <div class="text-center">

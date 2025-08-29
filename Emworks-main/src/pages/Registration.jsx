@@ -1,10 +1,15 @@
 import axios from 'axios';
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import toast from 'react-hot-toast';
 import{ Link, useNavigate} from 'react-router'
 import User from '../../../backend/models/User';
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const Registration = () => {
+    useEffect(() => {
+        AOS.init({ duration: 800, once: true }); 
+      }, []);
     const [firstname,setfisrtname]=useState("");
     const [lastname,setlastname]=useState("");
     const [email,setemail]=useState("");
@@ -45,7 +50,8 @@ const Registration = () => {
         }
     }
   return (
-    <div className="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+    <div className="bg-gray-100 min-h-screen flex items-center justify-center p-4"
+         data-aos="zoom-out-up" >
     <div className="bg-white rounded-lg shadow-xl p-6 w-full max-w-md">
         <div className="mb-8 text-center">
             <h1 className="text-2xl font-bold text-gray-800">Create an Account</h1>

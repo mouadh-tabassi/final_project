@@ -5,21 +5,24 @@ import HomeContent from '../components/HomeContent'
 import HeaderSec from '../components/HeaderSec'
 import CardModule from '../components/CardModule'
 import Internship from '../components/Intership'
-import axios from 'axios'
-import {jwtDecode} from "jwt-decode";
+import Home from '../components/home'
+import Contactus from '../components/Contactus'
+import Aboutus from '../components/Aboutus'
+import Service from '../components/Service'
 
 const HomePage = () => {
   return (
     <div>
       <Navbar/>
-      <HeaderSec/>
-      <Internship/>
-      <CardModule />
+      <Home/>
+      <Aboutus/>
+      <Service/>
+      <Contactus/>
       <Footer
       item1="About us"
       item2="Conatct"
-      item3="Products"
-      item4="Services"/>
+      item3="Services"
+      />
     </div>
   )
 }

@@ -39,6 +39,16 @@ export default function Navbar(props) {
     }
     const isloggedIn=!!user
     const navigate=useNavigate();
+    const scrolltocontact=()=>{
+      window.scrollTo(0,2632.800048828125);
+      
+    }
+    const scrolltoaboutus=()=>{
+      window.scrollTo(0,875.2000122070312);
+    }
+     const scrolltoservices=()=>{
+      window.scrollTo(0,1848);
+    }
   return (
     <div>
       {/* Navbar with Mega Menu */}
@@ -63,26 +73,21 @@ export default function Navbar(props) {
                   </a>
 
                   {/* Products Dropdown Trigger */}
-                  <div className="relative group">
-                    <button className="text-gray-900 hover:bg-gray-100 px-3 py-2 rounded-md text-sm font-medium flex items-center">
-                      Products
-
-                    </button>
-                  </div>
-
                   <a
+                  onClick={scrolltoservices}
                     href="#"
                     className="text-gray-900 hover:bg-gray-100 px-3 py-2 rounded-md text-sm font-medium"
                   >
                     Services
                   </a>
                   <a
+                    onClick={scrolltoaboutus}
                     href="#"
                     className="text-gray-900 hover:bg-gray-100 px-3 py-2 rounded-md text-sm font-medium"
                   >
                     About
                   </a>
-                  <a
+                  <a onClick={scrolltocontact}
                     href="#"
                     className="text-gray-900 hover:bg-gray-100 px-3 py-2 rounded-md text-sm font-medium"
                   >
@@ -106,10 +111,15 @@ export default function Navbar(props) {
               <ul
                     tabIndex={0}
                     className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-              <li><a onClick={()=>{localStorage.removeItem("token");
+                  {user.email=="admin@admin.com"?(<div><li><a href="/Users">Users</a></li>
+                <li><a onClick={()=>{localStorage.removeItem("token");
                                     navigate("/Login");
                                              
-              }}>Logout</a></li>
+              }}>Logout</a></li></div>):( <li><a onClick={()=>{localStorage.removeItem("token");
+                                    navigate("/Login");
+                                             
+              }}>Logout</a></li>)}
+             
               </ul>
                 </div>
                 </div>
